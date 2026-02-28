@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mark & Daria - July 10, 2025</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-slate-950 text-white overflow-x-hidden">
+
+    <!-- Animated Background -->
+    <div class="fixed inset-0 z-0">
+        <div class="absolute inset-0 bg-gradient-to-br from-slate-950 via-purple-950/30 to-slate-950"></div>
+        <div class="absolute inset-0" style="background: radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.15) 0%, transparent 50%);"></div>
+        <div id="particles" class="absolute inset-0 opacity-30"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 px-6 py-4 glass-nav">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <span class="font-serif text-xl tracking-widest text-purple-200/80">M & D</span>
+            <div class="hidden md:flex gap-8 text-sm font-sans tracking-wider text-purple-200/60">
+                <a href="#date" class="hover:text-white transition-colors">THE DATE</a>
+                <a href="#schedule" class="hover:text-white transition-colors">SCHEDULE</a>
+                <a href="#rsvp" class="hover:text-white transition-colors">RSVP</a>
+            </div>
+            <button class="md:hidden" onclick="toggleMenu()">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed inset-0 z-40 bg-slate-950/95 backdrop-blur-xl hidden flex-col items-center justify-center gap-8 text-lg">
+        <a href="#date" onclick="toggleMenu()" class="text-purple-200 hover:text-white">THE DATE</a>
+        <a href="#schedule" onclick="toggleMenu()" class="text-purple-200 hover:text-white">SCHEDULE</a>
+        <a href="#rsvp" onclick="toggleMenu()" class="text-purple-200 hover:text-white">RSVP</a>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="relative z-10 min-h-screen flex items-center justify-center px-4">
+        <div class="text-center max-w-4xl mx-auto">
+            <div class="mb-8 floating">
+                <div class="w-32 h-32 mx-auto rounded-full bg-gradient-to-tr from-purple-500/20 to-pink-500/20 backdrop-blur-xl border border-purple-400/30 flex items-center justify-center mb-6 glow">
+                    <i data-lucide="heart" class="w-12 h-12 text-purple-300"></i>
+                </div>
+            </div>
+            <p class="text-sm md:text-base tracking-[0.3em] text-purple-300/80 mb-4 font-sans uppercase">Save the Date</p>
+            <h1 class="font-serif text-6xl md:text-8xl lg:text-9xl font-light mb-6 text-transparent bg-clip-text bg-gradient-to-r from-white via-purple-200 to-pink-200 leading-tight">
+                Mark & Daria
+            </h1>
+            <div class="h-px w-24 bg-gradient-to-r from-transparent via-purple-400 to-transparent mx-auto mb-6"></div>
+            <p class="text-xl md:text-2xl text-purple-200/60 font-sans font-light tracking-widest">
+                JOIN US AS WE BEGIN FOREVER
+            </p>
+        </div>
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
+            <i data-lucide="chevron-down" class="w-6 h-6 text-purple-400/50"></i>
+        </div>
+    </header>
+
+    <!-- Date Section -->
+    <section id="date" class="relative z-10 py-24 px-4">
+        <div class="max-w-4xl mx-auto">
+            <div class="glass-card rounded-3xl p-8 md:p-16 text-center border border-purple-400/20">
+                <h2 class="font-serif text-4xl md:text-5xl mb-8 text-white">The Celebration</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                    <div class="text-center">
+                        <p class="text-sm tracking-widest text-purple-400/60 mb-2 uppercase">Date</p>
+                        <p class="font-serif text-2xl md:text-3xl text-white">July 10th</p>
+                        <p class="text-purple-300/80">2025</p>
+                    </div>
+                    <div class="text-center border-t md:border-t-0 md:border-l border-b md:border-b-0 md:border-r border-purple-400/20 py-4 md:py-0">
+                        <p class="text-sm tracking-widest text-purple-400/60 mb-2 uppercase">Time</p>
+                        <p class="font-sans text-2xl md:text-3xl text-white font-light">15:15</p>
+                        <p class="text-purple-300/80">Arrival Time</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-sm tracking-widest text-purple-400/60 mb-2 uppercase">Location</p>
+                        <p class="font-serif text-2xl md:text-3xl text-white">Tallinn Area</p>
+                        <p class="text-purple-300/80">Estonia</p>
+                    </div>
+                </div>
+                
+                <!-- Countdown -->
+                <div class="grid grid-cols-4 gap-4 max-w-2xl mx-auto">
+                    <div class="glass-sub rounded-2xl p-4">
+                        <span id="days" class="block font-sans text-3xl md:text-4xl font-bold text-white">000</span>
+                        <span class="text-xs text-purple-300/60 uppercase tracking-wider">Days</span>
+                    </div>
+                    <div class="glass-sub rounded-2xl p-4">
+                        <span id="hours" class="block font-sans text-3xl md:text-4xl font-bold text-white">00</span>
+                        <span class="text-xs text-purple-300/60 uppercase tracking-wider">Hours</span>
+                    </div>
+                    <div class="glass-sub rounded-2xl p-4">
+                        <span id="minutes" class="block font-sans text-3xl md:text-4xl font-bold text-white">00</span>
+                        <span class="text-xs text-purple-300/60 uppercase tracking-wider">Minutes</span>
+                    </div>
+                    <div class="glass-sub rounded-2xl p-4">
+                        <span id="seconds" class="block font-sans text-3xl md:text-4xl font-bold text-white">00</span>
+                        <span class="text-xs text-purple-300/60 uppercase tracking-wider">Seconds</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Schedule Section -->
+    <section id="schedule" class="relative z-10 py-24 px-4 bg-gradient-to-b from-transparent via-purple-950/10 to-transparent">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="font-serif text-4xl md:text-5xl text-center mb-16 text-white">Schedule of Events</h2>
+            
+            <div class="relative">
+                <!-- Timeline Line -->
+                <div class="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-purple-400 via-pink-400 to-purple-400 md:-translate-x-1/2"></div>
+                
+                <!-- Event 1 -->
+                <div class="relative pl-12 md:pl-0 mb-16 md:mb-0 md:grid md:grid-cols-2 md:gap-8 items-center group">
+                    <div class="md:text-right md:pr-12">
+                        <div class="glass-timeline rounded-2xl p-6 md:p-8 transform transition-all duration-500 hover:scale-105">
+                            <span class="inline-block px-4 py-1 rounded-full bg-purple-500/20 border border-purple-400/30 text-purple-200 text-sm font-medium mb-4">
+                                15:15 - Arrival
+                            </span>
+                            <h3 class="font-serif text-2xl mb-3 text-white">Welcome & Registration</h3>
+                            <p class="text-purple-200/70 font-light mb-2">
+                                Please arrive by 15:15 to get settled. We want everyone comfortable before the ceremony begins! ✨
+                            </p>
+                            <p class="text-purple-200/50 text-sm italic mb-3">Ceremony starts promptly at 15:30</p>
+                            <div class="flex items-center gap-2 text-sm text-purple-300/60 md:justify-end">
+                                <i data-lucide="map-pin" class="w-4 h-4"></i>
+                                <span>Pärnu mnt. 67, 10135 Tallinn</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute left-2 md:left-1/2 top-6 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 w-4 h-4 rounded-full bg-purple-400 border-4 border-slate-950 shadow-[0_0_20px_rgba(168,85,247,0.6)]"></div>
+                    <div class="hidden md:block md:pl-12">
+                        <i data-lucide="door-open" class="w-12 h-12 text-purple-400/30"></i>
+                    </div>
+                </div>
+
+                <!-- Event 2 -->
+                <div class="relative pl-12 md:pl-0 mb-16 md:mb-0 md:grid md:grid-cols-2 md:gap-8 items-center group">
+                    <div class="hidden md:block md:text-right md:pr-12">
+                        <i data-lucide="heart-handshake" class="w-12 h-12 text-pink-400/30 ml-auto"></i>
+                    </div>
+                    <div class="absolute left-2 md:left-1/2 top-6 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 w-4 h-4 rounded-full bg-pink-400 border-4 border-slate-950 shadow-[0_0_20px_rgba(236,72,153,0.6)]"></div>
+                    <div class="md:pl-12">
+                        <div class="glass-timeline rounded-2xl p-6 md:p-8 transform transition-all duration-500 hover:scale-105 border-pink-400/20">
+                            <span class="inline-block px-4 py-1 rounded-full bg-pink-500/20 border border-pink-400/30 text-pink-200 text-sm font-medium mb-4">
+                                15:30 - 16:15
+                            </span>
+                            <h3 class="font-serif text-2xl mb-3 text-white">The Ceremony</h3>
+                            <p class="text-purple-200/70 font-light mb-4">
+                                Our "I do" moment! Join us for this beautiful 45-minute celebration of love and commitment. 💕
+                            </p>
+                            <div class="flex items-center gap-2 text-sm text-purple-300/60">
+                                <i data-lucide="clock" class="w-4 h-4"></i>
+                                <span>45 minutes of pure joy</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event 3 -->
+                <div class="relative pl-12 md:pl-0 md:grid md:grid-cols-2 md:gap-8 items-center group">
+                    <div class="md:text-right md:pr-12">
+                        <div class="glass-timeline rounded-2xl p-6 md:p-8 transform transition-all duration-500 hover:scale-105">
+                            <span class="inline-block px-4 py-1 rounded-full bg-cyan-500/20 border border-cyan-400/30 text-cyan-200 text-sm font-medium mb-4">
+                                17:00 - 23:00/00:00
+                            </span>
+                            <h3 class="font-serif text-2xl mb-3 text-white">Party Time!</h3>
+                            <p class="text-purple-200/70 font-light mb-3">
+                                Dinner, drinks, dancing, and laughter at a lovely house/villa near Tallinn. Let's celebrate together! 🎉
+                            </p>
+                            <div class="glass-sub rounded-lg p-3 mb-3 border border-yellow-400/30 bg-yellow-500/10">
+                                <p class="text-yellow-200/90 text-xs flex items-start gap-2">
+                                    <i data-lucide="info" class="w-4 h-4 flex-shrink-0 mt-0.5"></i>
+                                    <span>Please note: No sleepover available at the venue. Kindly arrange your own transportation home by midnight. 🌙</span>
+                                </p>
+                            </div>
+                            <div class="flex items-center gap-2 text-sm text-purple-300/60 md:justify-end">
+                                <i data-lucide="home" class="w-4 h-4"></i>
+                                <span>Address to be defined</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute left-2 md:left-1/2 top-6 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 w-4 h-4 rounded-full bg-cyan-400 border-4 border-slate-950 shadow-[0_0_20px_rgba(34,211,238,0.6)]"></div>
+                    <div class="hidden md:block md:pl-12">
+                        <i data-lucide="party-popper" class="w-12 h-12 text-cyan-400/30"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RSVP Section -->
+    <section id="rsvp" class="relative z-10 py-24 px-4">
+        <div class="max-w-3xl mx-auto">
+            <div class="glass-card rounded-3xl p-8 md:p-12 border border-purple-400/20">
+                <div class="text-center mb-10">
+                    <i data-lucide="mail" class="w-12 h-12 mx-auto text-purple-400 mb-4"></i>
+                    <h2 class="font-serif text-4xl md:text-5xl text-white mb-4">Confirm Your Presence</h2>
+                    <p class="text-purple-200/60">Kindly let us know by June 15th, 2025 💕</p>
+                </div>
+
+                <!-- Urgency Notice -->
+                <div class="glass-sub rounded-xl p-4 mb-8 border border-orange-400/30 bg-orange-500/10">
+                    <div class="flex items-start gap-3">
+                        <i data-lucide="alert-circle" class="w-5 h-5 text-orange-300 flex-shrink-0 mt-0.5"></i>
+                        <div>
+                            <p class="text-orange-200/90 text-sm font-medium mb-1">Please RSVP as soon as possible! 🙏</p>
+                            <p class="text-orange-200/70 text-xs">We need to confirm numbers to book the perfect party house for everyone. If you don't register, we unfortunately can't count you in.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <form id="rsvp-form" class="space-y-8" action="https://formspree.io/f/xjgedvqe" method="POST">
+                    <!-- Attendance -->
+                    <div class="space-y-4">
+                        <label class="block text-sm tracking-wider text-purple-300/80 uppercase mb-4">Will you be attending?</label>
+                        <div class="grid grid-cols-2 gap-4">
+                            <label class="attendance-option cursor-pointer relative">
+                                <input type="radio" name="attendance" value="yes" class="peer hidden" required>
+                                <div class="glass-sub rounded-xl p-6 text-center border border-purple-400/20 peer-checked:border-green-400/50 peer-checked:bg-green-500/10 transition-all hover:border-purple-400/40">
+                                    <i data-lucide="check-circle" class="w-8 h-8 mx-auto mb-2 text-purple-400 peer-checked:text-green-400"></i>
+                                    <span class="block text-white font-medium">Joyfully Accept</span>
+                                </div>
+                            </label>
+                            <label class="attendance-option cursor-pointer relative">
+                                <input type="radio" name="attendance" value="no" class="peer hidden">
+                                <div class="glass-sub rounded-xl p-6 text-center border border-purple-400/20 peer-checked:border-red-400/50 peer-checked:bg-red-500/10 transition-all hover:border-purple-400/40">
+                                    <i data-lucide="x-circle" class="w-8 h-8 mx-auto mb-2 text-purple-400 peer-checked:text-red-400"></i>
+                                    <span class="block text-white font-medium">Regretfully Decline</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Guest Details -->
+                    <div class="space-y-4 animate-fade-in" id="guest-details">
+                        <div>
+                            <label class="block text-sm tracking-wider text-purple-300/80 uppercase mb-2">Full Name</label>
+                            <input type="text" name="name" required class="w-full bg-white/5 border border-purple-400/30 rounded-xl px-4 py-3 text-white placeholder-purple-300/30 focus:outline-none focus:border-purple-400/60 focus:bg-white/10 transition-all" placeholder="Enter your name">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm tracking-wider text-purple-300/80 uppercase mb-2">Email</label>
+                            <input type="email" name="email" required class="w-full bg-white/5 border border-purple-400/30 rounded-xl px-4 py-3 text-white placeholder-purple-300/30 focus:outline-none focus:border-purple-400/60 focus:bg-white/10 transition-all" placeholder="your@email.com">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm tracking-wider text-purple-300/80 uppercase mb-2">Number of Guests</label>
+                            <select name="guests" required class="w-full bg-white/5 border border-purple-400/30 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-purple-400/60 focus:bg-white/10 transition-all appearance-none cursor-pointer">
+                                <option value="" disabled selected class="bg-slate-900 text-purple-300/30">Select how many...</option>
+                                <option value="1" class="bg-slate-900">Just me</option>
+                                <option value="2" class="bg-slate-900">Me +1 (Adult only, no kids)</option>
+                            </select>
+                            <p class="text-xs text-purple-300/50 mt-2 flex items-center gap-1">
+                                <i data-lucide="users" class="w-3 h-3"></i>
+                                Please note: Adults only, no children at the party
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Food Info -->
+                    <div class="space-y-4 animate-fade-in" id="food-section">
+                        <div class="glass-sub rounded-xl p-5 border border-purple-400/20">
+                            <div class="flex items-center gap-3 mb-3">
+                                <i data-lucide="utensils" class="w-5 h-5 text-purple-400"></i>
+                                <label class="text-sm tracking-wider text-purple-300/80 uppercase">What's on the Menu</label>
+                            </div>
+                            <p class="text-purple-200/70 text-sm mb-3">
+                                We'll have delicious <strong class="text-white">pizzas</strong>, <strong class="text-white">cake</strong>, and plenty of <strong class="text-white">snacks</strong> ready at the party house! 🍕🍰
+                            </p>
+                            <p class="text-xs text-purple-300/50 flex items-center gap-1">
+                                <i data-lucide="info" class="w-3 h-3"></i>
+                                Grab food and drinks whenever you like - everything's there to keep the party going!
+                            </p>
+                        </div>
+
+                        <label class="block text-sm tracking-wider text-purple-300/80 uppercase mb-4">
+                            Dietary Preferences <span class="text-xs normal-case text-purple-400/50">(Check all that apply)</span>
+                        </label>
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                            <label class="preference-checkbox cursor-pointer">
+                                <input type="checkbox" name="dietary-prefs" value="vegetarian" class="peer hidden">
+                                <div class="glass-sub rounded-lg px-4 py-3 border border-purple-400/20 peer-checked:border-green-400/60 peer-checked:bg-green-500/20 transition-all text-center">
+                                    <i data-lucide="salad" class="w-5 h-5 mx-auto mb-1 text-purple-400"></i>
+                                    <span class="text-xs block">Vegetarian 🥗</span>
+                                </div>
+                            </label>
+                            <label class="preference-checkbox cursor-pointer">
+                                <input type="checkbox" name="dietary-prefs" value="meat" class="peer hidden">
+                                <div class="glass-sub rounded-lg px-4 py-3 border border-purple-400/20 peer-checked:border-red-400/60 peer-checked:bg-red-500/20 transition-all text-center">
+                                    <i data-lucide="beef" class="w-5 h-5 mx-auto mb-1 text-purple-400"></i>
+                                    <span class="text-xs block">Meat 🍖</span>
+                                </div>
+                            </label>
+                            <label class="preference-checkbox cursor-pointer">
+                                <input type="checkbox" name="dietary-prefs" value="lactose-free" class="peer hidden">
+                                <div class="glass-sub rounded-lg px-4 py-3 border border-purple-400/20 peer-checked:border-blue-400/60 peer-checked:bg-blue-500/20 transition-all text-center">
+                                    <i data-lucide="milk-off" class="w-5 h-5 mx-auto mb-1 text-purple-400"></i>
+                                    <span class="text-xs block">Lactose-Free 🥛</span>
+                                </div>
+                            </label>
+                            <label class="preference-checkbox cursor-pointer md:col-span-2">
+                                <input type="checkbox" name="dietary-prefs" value="gluten-free" class="peer hidden">
+                                <div class="glass-sub rounded-lg px-4 py-3 border border-purple-400/20 peer-checked:border-yellow-400/60 peer-checked:bg-yellow-500/20 transition-all text-center">
+                                    <i data-lucide="wheat-off" class="w-5 h-5 mx-auto mb-1 text-purple-400"></i>
+                                    <span class="text-xs block">Gluten-Free 🌾</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Drink Preferences -->
+                    <div class="space-y-4 animate-fade-in" id="drink-section">
+                        <label class="block text-sm tracking-wider text-purple-300/80 uppercase mb-4">
+                            What would you like to drink? <span class="text-xs normal-case text-purple-400/50">(Pick your favorites!)</span>
+                        </label>
+                        <div class="grid grid-cols-2 gap-3">
+                            <label class="preference-checkbox cursor-pointer">
+                                <input type="checkbox" name="drinks" value="soft-drinks" class="peer hidden">
+                                <div class="glass-sub rounded-lg px-4 py-3 border border-purple-400/20 peer-checked:border-green-400/60 peer-checked:bg-green-500/20 transition-all text-center">
+                                    <i data-lucide="cup-soda" class="w-5 h-5 mx-auto mb-1 text-purple-400"></i>
+                                    <span class="text-xs block">Soft Drinks 🥤</span>
+                                </div>
+                            </label>
+                            <label class="preference-checkbox cursor-pointer">
+                                <input type="checkbox" name="drinks" value="beer" class="peer hidden">
+                                <div class="glass-sub rounded-lg px-4 py-3 border border-purple-400/20 peer-checked:border-yellow-400/60 peer-checked:bg-yellow-500/20 transition-all text-center">
+                                    <i data-lucide="beer" class="w-5 h-5 mx-auto mb-1 text-purple-400"></i>
+                                    <span class="text-xs block">Beer 🍺</span>
+                                </div>
+                            </label>
+                            <label class="preference-checkbox cursor-pointer">
+                                <input type="checkbox" name="drinks" value="cider" class="peer hidden">
+                                <div class="glass-sub rounded-lg px-4 py-3 border border-purple-400/20 peer-checked:border-orange-400/60 peer-checked:bg-orange-500/20 transition-all text-center">
+                                    <i data-lucide="apple" class="w-5 h-5 mx-auto mb-1 text-purple-400"></i>
+                                    <span class="text-xs block">Cider 🍎</span>
+                                </div>
+                            </label>
+                            <label class="preference-checkbox cursor-pointer">
+                                <input type="checkbox" name="drinks" value="wine" class="peer hidden">
+                                <div class="glass-sub rounded-lg px-4 py-3 border border-purple-400/20 peer-checked:border-pink-400/60 peer-checked:bg-pink-500/20 transition-all text-center">
+                                    <i data-lucide="wine" class="w-5 h-5 mx-auto mb-1 text-purple-400"></i>
+                                    <span class="text-xs block">Wine 🍷</span>
+                                </div>
+                            </label>
+                        </div>
+                        <p class="text-xs text-purple-300/50 text-center flex items-center justify-center gap-1 mt-3">
+                            <i data-lucide="party-popper" class="w-3 h-3"></i>
+                            Help yourself to drinks and snacks throughout the party!
+                        </p>
+                    </div>
+
+                    <!-- Dietary Restrictions -->
+                    <div class="animate-fade-in">
+                        <label class="block text-sm tracking-wider text-purple-300/80 uppercase mb-2">Dietary Restrictions / Allergies</label>
+                        <textarea name="dietary" rows="3" class="w-full bg-white/5 border border-purple-400/30 rounded-xl px-4 py-3 text-white placeholder-purple-300/30 focus:outline-none focus:border-purple-400/60 focus:bg-white/10 transition-all resize-none" placeholder="Let us know if you have any allergies or special dietary requirements..."></textarea>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="w-full relative overflow-hidden group bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-medium py-4 rounded-xl transition-all duration-300 transform hover:scale-[1.02] shadow-[0_0_30px_rgba(168,85,247,0.4)]">
+                        <span class="relative z-10 flex items-center justify-center gap-2">
+                            <span>Send My RSVP</span>
+                            <i data-lucide="heart" class="w-4 h-4"></i>
+                        </span>
+                        <div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                    </button>
+                </form>
+
+                <!-- Success Message -->
+                <div id="success-message" class="hidden text-center py-12">
+                    <div class="w-20 h-20 mx-auto rounded-full bg-green-500/20 border border-green-400/50 flex items-center justify-center mb-6 animate-bounce">
+                        <i data-lucide="heart" class="w-10 h-10 text-green-400 fill-current"></i>
+                    </div>
+                    <h3 class="font-serif text-3xl text-white mb-2">Thank You! 💕</h3>
+                    <p class="text-purple-200/70">We're so excited to have you celebrate with us! Get ready for an unforgettable day filled with love, laughter, and lots of dancing!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="relative z-10 py-12 px-4 text-center border-t border-purple-400/10">
+        <div class="max-w-4xl mx-auto">
+            <p class="font-serif text-2xl text-white mb-2">Mark & Daria</p>
+            <p class="text-purple-300/50 text-sm tracking-widest">10.07.2025</p>
+            <div class="mt-8 flex justify-center gap-4">
+                <a href="#" class="w-10 h-10 rounded-full glass-sub flex items-center justify-center hover:bg-purple-500/20 transition-all">
+                    <i data-lucide="heart" class="w-5 h-5 text-purple-400"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+<script src="https://deepsite.hf.co/deepsite-badge.js"></script>
+</body>
+</html>
