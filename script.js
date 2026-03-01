@@ -1,25 +1,3 @@
-// Countdown Timer - Counting down to the ceremony at 15:30
-function updateCountdown() {
-    const weddingDate = new Date('July 10, 2025 15:15:00').getTime();
-    const now = new Date().getTime();
-    const distance = weddingDate - now;
-
-    if (distance > 0) {
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        document.getElementById('days').textContent = days.toString().padStart(3, '0');
-        document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-        document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-        document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-    }
-}
-
-setInterval(updateCountdown, 1000);
-updateCountdown();
-
 // Mobile Menu Toggle
 function toggleMenu() {
     const menu = document.getElementById('mobile-menu');
@@ -38,10 +16,16 @@ const successMessage = document.getElementById('success-message');
 // Handle attendance selection
 attendanceInputs.forEach(input => {
     input.addEventListener('change', (e) => {
+        const emailField = form.querySelector('[name="email"]');
+        const guestsField = form.querySelector('[name="guests"]');
+        
         if (e.target.value === 'yes') {
             guestDetails.style.display = 'block';
             foodSection.style.display = 'block';
             drinkSection.style.display = 'block';
+            // Add required attributes back for acceptance
+            emailField.setAttribute('required', '');
+            guestsField.setAttribute('required', '');
             // Add animation
             [guestDetails, foodSection, drinkSection].forEach((el, i) => {
                 el.style.opacity = '0';
@@ -53,10 +37,125 @@ attendanceInputs.forEach(input => {
                 }, i * 100);
             });
         } else {
-            // If declining, still show guest details to know who is declining
+            // If declining, still show guest details but remove required from email and guests
             guestDetails.style.display = 'block';
             foodSection.style.display = 'none';
             drinkSection.style.display = 'none';
+            // Remove required attributes so only name is mandatory
+            emailField.removeAttribute('required');
+            guestsField.removeAttribute('required');
+        }
+    });
+});
+
+// Form validation feedback
+function showFieldError(fieldName, message) {
+    const field = form.querySelector(`[name="${fieldName}"]`);
+    if (!field) return;
+    
+    // Remove existing error
+    const existingError = field.parentElement.querySelector('.field-error');
+    if (existingError) existingError.remove();
+    
+    // Create error message
+    const errorDiv = document.createElement('div');
+    errorDiv.className = 'field-error text-red-400 text-xs mt-1 flex items-center gap-1 animate-fade-in';
+    errorDiv.innerHTML = `<i data-lucide="alert-circle" class="w-3 h-3"></i><span>${message}</span>`;
+    
+    // Add error after field
+    if (field.type === 'radio') {
+        // For radio buttons, find the parent container
+        const container = field.closest('.space-y-4') || field.parentElement.parentElement;
+        container.appendChild(errorDiv);
+    } else {
+        field.parentElement.appendChild(errorDiv);
+    }
+    
+    // Highlight field
+    if (field.type !== 'radio') {
+        field.classList.add('border-red-400/60', 'bg-red-500/10');
+    }
+    
+    // Reinitialize icons
+    if (window.lucide) lucide.createIcons();
+}
+
+function clearFieldErrors() {
+    form.querySelectorAll('.field-error').forEach(el => el.remove());
+    form.querySelectorAll('input, select, textarea').forEach(el => {
+        el.classList.remove('border-red-400/60', 'bg-red-500/10');
+    });
+}
+
+function validateForm() {
+    clearFieldErrors();
+    let isValid = true;
+    let firstErrorField = null;
+    
+    // Check attendance (required)
+    const attendance = form.querySelector('input[name="attendance"]:checked');
+    if (!attendance) {
+        showFieldError('attendance', 'Please select whether you will attend or not');
+        isValid = false;
+        if (!firstErrorField) firstErrorField = form.querySelector('input[name="attendance"]');
+    }
+    
+    const selectedAttendance = attendance ? attendance.value : null;
+    
+    if (selectedAttendance === 'yes' || selectedAttendance === 'no') {
+        // Name is always mandatory for both acceptance and decline
+        const name = form.querySelector('[name="name"]');
+        if (!name.value.trim()) {
+            showFieldError('name', 'Please enter your full name');
+            isValid = false;
+            if (!firstErrorField) firstErrorField = name;
+        }
+    }
+    
+    // Different validation for acceptance vs decline
+    if (selectedAttendance === 'yes') {
+        // For acceptance: all fields except dietary restrictions text field are mandatory
+        const email = form.querySelector('[name="email"]');
+        if (!email.value.trim()) {
+            showFieldError('email', 'Please enter your email address');
+            isValid = false;
+            if (!firstErrorField) firstErrorField = email;
+        } else if (!email.value.includes('@')) {
+            showFieldError('email', 'Please enter a valid email address');
+            isValid = false;
+            if (!firstErrorField) firstErrorField = email;
+        }
+        
+        const guests = form.querySelector('[name="guests"]');
+        if (!guests.value) {
+            showFieldError('guests', 'Please select the number of guests');
+            isValid = false;
+            if (!firstErrorField) firstErrorField = guests;
+        }
+        
+        // Note: Dietary preferences checkboxes and drinks checkboxes are optional
+        // Dietary restrictions text field is optional as requested
+    } else if (selectedAttendance === 'no') {
+        // For decline: ONLY name is mandatory
+        // Email and guests are optional - we don't validate them at all
+        // Dietary sections are hidden anyway
+    }
+    
+    // Scroll to first error
+    if (firstErrorField) {
+        firstErrorField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    
+    return isValid;
+}
+
+// Clear errors on input
+form.querySelectorAll('input, select, textarea').forEach(field => {
+    field.addEventListener('change', () => {
+        const error = field.parentElement.querySelector('.field-error');
+        if (error) {
+            error.remove();
+            field.classList.remove('border-red-400/60', 'bg-red-500/10');
         }
     });
 });
@@ -64,6 +163,11 @@ attendanceInputs.forEach(input => {
 // Form submission - Now integrated with Formspree
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
+    
+    // Validate first
+    if (!validateForm()) {
+        return;
+    }
     
     const submitBtn = form.querySelector('button[type="submit"]');
     const originalText = submitBtn.innerHTML;
@@ -84,8 +188,12 @@ form.addEventListener('submit', async (e) => {
         });
         
         if (response.ok) {
-            // Hide form and show success
+            // Hide form, urgency notice and show success
             form.style.display = 'none';
+            const urgencyNotice = document.getElementById('urgency-notice');
+            if (urgencyNotice) {
+                urgencyNotice.style.display = 'none';
+            }
             successMessage.classList.remove('hidden');
             
             // Reinitialize icons for success message
