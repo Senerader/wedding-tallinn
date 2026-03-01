@@ -33,7 +33,7 @@ attendanceInputs.forEach(input => {
             emailField.setAttribute('required', '');
             guestsField.setAttribute('required', '');
             // Add animation
-            [guestDetails, foodSection, drinkSection].forEach((el, i) => {
+            [guestDetails, foodSection, drinkSection, guestsNumberSection, emailSection, dietarySection].forEach((el, i) => {
                 el.style.opacity = '0';
                 el.style.transform = 'translateY(20px)';
                 setTimeout(() => {
