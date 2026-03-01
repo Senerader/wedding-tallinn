@@ -26,6 +26,9 @@ attendanceInputs.forEach(input => {
             guestDetails.style.display = 'block';
             foodSection.style.display = 'block';
             drinkSection.style.display = 'block';
+            guestsNumberSection.style.display = 'block'; 
+            emailSection.style.display = 'block';
+            dietarySection.style.display = 'block';
             // Add required attributes back for acceptance
             emailField.setAttribute('required', '');
             guestsField.setAttribute('required', '');
