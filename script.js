@@ -12,6 +12,9 @@ const guestDetails = document.getElementById('guest-details');
 const foodSection = document.getElementById('food-section');
 const drinkSection = document.getElementById('drink-section');
 const successMessage = document.getElementById('success-message');
+const guestsNumberSection = document.getElementById('guests-number-section'); 
+const emailSection = document.getElementById('email-section'); 
+const dietarySection = document.getElementById('dietary-section'); 
 
 // Handle attendance selection
 attendanceInputs.forEach(input => {
@@ -41,6 +44,9 @@ attendanceInputs.forEach(input => {
             guestDetails.style.display = 'block';
             foodSection.style.display = 'none';
             drinkSection.style.display = 'none';
+            guestsNumberSection.style.display = 'none'; 
+            emailSection.style.display = 'none';
+            dietarySection.style.display = 'none';
             // Remove required attributes so only name is mandatory
             emailField.removeAttribute('required');
             guestsField.removeAttribute('required');
