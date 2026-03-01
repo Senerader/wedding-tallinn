@@ -32,6 +32,8 @@ attendanceInputs.forEach(input => {
             // Add required attributes back for acceptance
             emailField.setAttribute('required', '');
             guestsField.setAttribute('required', '');
+            emailSection.setAttribute('required', '');
+            guestsNumberSection.setAttribute('required', '');
             // Add animation
             [guestDetails, foodSection, drinkSection, guestsNumberSection, emailSection, dietarySection].forEach((el, i) => {
                 el.style.opacity = '0';
